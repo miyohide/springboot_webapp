@@ -1,0 +1,24 @@
+package com.github.miyohide.webapp;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@DataJdbcTest
+public class UserRepositoryTest {
+    @Autowired
+    private UserRepository userRepository;
+
+    @Test
+    void test() {
+        User u = userRepository.save(new User("test@example.com", "password"));
+        assertNotNull(u.getId());
+        Optional<User> maybeUser = userRepository.findById(u.getId());
+        assertTrue(maybeUser.isPresent());
+        maybeUser.ifPresent(user -> assertEquals(u.getEmail(), user.getEmail()));
+    }
+}
