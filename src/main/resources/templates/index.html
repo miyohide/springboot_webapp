@@ -13,6 +13,7 @@
     <a th:href="@{/login}">ログイン</a>
 </div>
 <div sec:authorize="isAuthenticated()">
+    <span th:text="${#authentication.name}">email</span>
     <a th:href="@{/logout}">ログアウト</a>
 </div>
 <dl>
