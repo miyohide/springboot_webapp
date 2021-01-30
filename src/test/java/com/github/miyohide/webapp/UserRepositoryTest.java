@@ -14,11 +14,11 @@ public class UserRepositoryTest {
     private UserRepository userRepository;
 
     @Test
-    void test() {
-        User u = userRepository.save(new User("test@example.com", "password"));
-        assertNotNull(u.getId());
-        Optional<User> maybeUser = userRepository.findById(u.getId());
+    void findByEmailTest() {
+        String email = "test@example.com";
+        User u = userRepository.save(new User(email, "password"));
+        Optional<User> maybeUser = userRepository.findByEmail(email);
         assertTrue(maybeUser.isPresent());
-        maybeUser.ifPresent(user -> assertEquals(u.getEmail(), user.getEmail()));
+        maybeUser.ifPresent(user -> assertEquals(email, user.getEmail()));
     }
 }
