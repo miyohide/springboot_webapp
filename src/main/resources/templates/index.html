@@ -12,16 +12,46 @@
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div sec:authorize="!isAuthenticated()">
-    <a th:href="@{/login}">ログイン</a>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">認証状態</div>
+                <div class="card-body">
+                    <div sec:authorize="!isAuthenticated()">
+                        <h5 class="card-title">未認証</h5>
+                        <a th:href="@{/login}" class="btn btn-primary">ログイン</a>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <h5 class="card-title" th:text="| ${#authentication.name}にて認証済み|"></h5>
+                        <a th:href="@{/logout}" class="btn btn-primary">ログアウト</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Cloud Foundry関連情報</div>
+                <div class="card-body">
+                    <ul>
+                        <li>Instancee GUID : <span th:text="${instance_guid}"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">セッション情報</div>
+                <div class="card-body">
+                    <th:block th:if="${#session != null}">
+                        <ul>
+                            <li>Session ID : <span th:text="${#session.id}"></span></li>
+                        </ul>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div sec:authorize="isAuthenticated()">
-    <span th:text="${#authentication.name}">email</span>
-    <a th:href="@{/logout}">ログアウト</a>
-</div>
-<dl>
-    <dt>Cloud Foundry Instance GUID</dt>
-    <dd th:text="${instance_guid}"></dd>
-</dl>
 </body>
 </html>
