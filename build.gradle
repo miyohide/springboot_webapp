@@ -21,6 +21,7 @@ dependencies {
     implementation 'org.webjars:bootstrap:4.6.0'
     implementation 'org.webjars:jquery:3.5.1'
     implementation 'org.webjars:webjars-locator:0.40'
+    implementation 'ch.qos.logback:logback-access:1.2.3'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     runtimeOnly 'com.h2database:h2'
 }
