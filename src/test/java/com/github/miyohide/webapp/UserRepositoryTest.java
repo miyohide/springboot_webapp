@@ -15,7 +15,7 @@ public class UserRepositoryTest {
 
     @Test
     void findByEmailTest() {
-        String email = "test@example.com";
+        String email = "user_repository_test@example.com";
         User u = userRepository.save(new User(email, "password", "ROLE_USER"));
         Optional<User> maybeUser = userRepository.findByEmail(email);
         assertTrue(maybeUser.isPresent());
